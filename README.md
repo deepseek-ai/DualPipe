@@ -1,3 +1,7 @@
+# MT-DualPipe
+
+This repository is forked from the open source project DualPipe [deepseek-ai/DualPipe](https://github.com/deepseek-ai/DualPipe). It enables dual pipeline training on Moore Threads GPUs using the PyTorch MUSA backend [torch_musa](https://github.com/MooreThreads/torch_musa).
+
 # DualPipe
 
 DualPipe is an innovative bidirectional pipeline parallelism algorithm introduced in the [DeepSeek-V3 Technical Report](https://arxiv.org/pdf/2412.19437). It achieves full overlap of forward and backward computation-communication phases, also reducing pipeline bubbles. For detailed information on computation-communication overlap, please refer to the [profile data](https://github.com/deepseek-ai/profile-data).

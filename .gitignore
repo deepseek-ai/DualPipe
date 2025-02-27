@@ -2,3 +2,5 @@ build
 *.egg-info/
 __pycache__/
 dist/
+output/*
+*.log
