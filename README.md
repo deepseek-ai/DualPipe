@@ -15,7 +15,7 @@ have mutually overlapped computation and communication
 
 | Method      | Bubble                          | Parameter | Activation |
 |-------------|---------------------------------|-----------|------------|
-| 1F1B        | (PP-1)(𝐹+𝑊)                     | 1×        | PP         |
+| 1F1B        | (PP-1)(𝐹+B)                     | 1×        | PP         |
 | ZB1P        | (PP-1)(𝐹+𝐵-2𝑊)                  | 1×        | PP         |
 | DualPipe    | (PP/2-1)(𝐹&𝐵+𝐵-3𝑊)             | 2×        | PP+1       |
 
