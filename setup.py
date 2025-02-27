@@ -15,4 +15,5 @@ except Exception as _:
 setup(
     name="dualpipe",
     version="1.0.0" + rev,
+    packages=["dualpipe"],
 )
