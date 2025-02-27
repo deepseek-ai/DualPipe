@@ -300,7 +300,7 @@ class DualPipe(nn.Module):
         return_outputs: bool = False,
     ) -> Tuple[Optional[torch.Tensor], Optional[Union[torch.Tensor, Tuple[torch.Tensor]]]]:
         """
-        Execute a traning or inference step.
+        Execute a training or inference step.
 
         Arguments:
             *inputs: Module inputs. Required only on the first/last ranks.
