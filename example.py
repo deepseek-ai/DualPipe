@@ -52,7 +52,7 @@ class PipelineStage(nn.Module):
         return x
 
     @classmethod
-    def overlaped_forward_backward(
+    def overlapped_forward_backward(
         cls,
         module0: "PipelineStage",
         inputs0: List[torch.Tensor],
