@@ -352,7 +352,7 @@ class DualPipe(nn.Module):
             self.labels = (labels, [])
         self.criterion = criterion
 
-        # For the fisrt half of the ranks: phase 0 means forward direction, phase 1 means reverse direction.
+        # For the first half of the ranks: phase 0 means forward direction, phase 1 means reverse direction.
         # For the second half of the ranks: phase 0 means reverse direction, phase 1 means forward direction.
 
         # Step 1: nF0
