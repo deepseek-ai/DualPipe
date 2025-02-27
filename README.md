@@ -2,7 +2,7 @@
 
 DualPipe is an innovative bidirectional pipeline parallism algorithm introduced in the [DeepSeek-V3 Technical Report](https://arxiv.org/pdf/2412.19437). It achieves full overlap of forward and backward computation-communication phases, also reducing pipeline bubbles. For detailed information on computation-communication overlap, please refer to the [profile data](https://github.com/deepseek-ai/profile-data).
 
-### Schedules
+## Schedules
 
 ![schedules](images/schedules.png)
 
@@ -19,7 +19,7 @@ have mutually overlapped computation and communication
 | ZB1P        | (PP-1)(𝐹+𝐵-2𝑊)                  | 1×        | PP         |
 | DualPipe    | (PP/2-1)(𝐹&𝐵+𝐵-3𝑊)             | 2×        | PP+1       |
 
-𝐹 denotes the execution time of a forward chunk, 𝐵 denotes the execution time of a
+**𝐹** denotes the execution time of a forward chunk, 𝐵 denotes the execution time of a
 full backward chunk, 𝑊 denotes the execution time of a "backward for weights" chunk, and 𝐹&𝐵
 denotes the execution time of two mutually overlapped forward and backward chunks.
 
