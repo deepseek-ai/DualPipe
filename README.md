@@ -57,10 +57,10 @@ DualPipe was created and developed by Jiashi Li and Chengqi Deng and Wenfeng Lia
 ## Citation
 
 ```bibtex
-@misc{deepseekai2024deepseekv3technicalreport,
+@misc{deepseekai2025deepseekv3technicalreport,
       title={DeepSeek-V3 Technical Report}, 
       author={DeepSeek-AI},
-      year={2024},
+      year={2025},
       eprint={2412.19437},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
