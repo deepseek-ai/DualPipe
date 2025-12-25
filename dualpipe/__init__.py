@@ -9,9 +9,9 @@ from dualpipe.comm import (
 from dualpipe.utils import WeightGradStore
 
 __all__ = [
-    DualPipe,
-    DualPipeV,
-    WeightGradStore,
-    set_p2p_tensor_shapes,
-    set_p2p_tensor_dtype,
+    "DualPipe",
+    "DualPipeV",
+    "WeightGradStore",
+    "set_p2p_tensor_shapes",
+    "set_p2p_tensor_dtype",
 ]
