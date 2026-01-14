@@ -382,7 +382,7 @@ class DualPipe(nn.Module):
         step_4 = half_num_chunks - num_ranks + half_rank + 1
         for i in range(step_4):
             if i == 0:
-                if self.is_middle_rank:
+                if self.is_middle_rank and not self.is_first_rank:
                     # NOTE: We don't overlap these two chunks to further reduce bubble size.
                     self._forward_chunk(0, recv=False, send=False)
                     self._send_forward(1)

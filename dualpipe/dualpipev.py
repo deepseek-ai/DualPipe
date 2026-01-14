@@ -353,7 +353,7 @@ class DualPipeV(nn.Module):
         step_4 = num_chunks - num_ranks * 2 + rank + 1
         for i in range(step_4):
             if i == 0:
-                if self.is_last_rank:
+                if self.is_last_rank and not self.is_first_rank:
                     # NOTE: We don't overlap these two chunks to further reduce bubble size.
                     self._forward_chunk(0, recv=False, send=False)
                     self._send_forward(1)
