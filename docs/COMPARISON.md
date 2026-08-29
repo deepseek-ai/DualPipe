@@ -12,7 +12,9 @@ This document provides a comprehensive comparison of pipeline parallelism method
 | **DualPipe** | Bidirectional full overlap | ~(1/3)×(PP-2)/acc | 2x | PP+1 | PP |
 | **DualPipeV** | V-shape half-device variant | ~DualPipe trend | 2x | PP+1 | PP/2 |
 
-*PP = pipeline stages, acc = accumulation steps, vpp = virtual pipeline stages*
+*PP = pipeline stages, acc = gradient accumulation microbatches per optimizer step, vpp = virtual pipeline stages*
+
+**Assumptions behind the bubble formulas.** `acc` counts gradient-accumulation microbatches within one optimizer step. Forward and backward chunk costs are treated as equal; in practice backward is roughly 2x forward, which changes the constants but not the relative trends. Communication time is excluded, i.e. assumed fully overlapped with computation; on interconnects where that overlap fails, the observed bubble is larger. The ratios are scheduling-model estimates for comparing methods, not exact throughput predictions.
 
 ## Method Descriptions
 
@@ -68,7 +70,7 @@ A "cut-in-half" variant of DualPipe introduced by Sea AI Lab, using half the dev
 
 ## Bubble Ratio Analysis
 
-The bubble ratio determines idle time during training. Lower is better.
+The bubble ratio determines idle time during training. Lower is better. The formulas below inherit the assumptions stated under the Overview table: equal forward and backward chunk cost, and communication fully hidden by computation.
 
 | Method | Formula | At PP=8, acc=16 |
 |--------|---------|-----------------|
