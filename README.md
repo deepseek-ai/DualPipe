@@ -40,9 +40,11 @@ denotes the execution time of two mutually overlapped forward and backward chunk
 The usage is shown in the following example:
 
 ```bash
-python examples/example_dualpipe.py
-python examples/example_dualpipev.py
+MASTER_ADDR=127.0.0.1 MASTER_PORT=29500 python examples/example_dualpipe.py
+MASTER_ADDR=127.0.0.1 MASTER_PORT=29500 python examples/example_dualpipev.py
 ```
+
+Both examples spawn their ranks via `torch.multiprocessing.spawn` and initialize the process group with `init_method="env://"`, so `MASTER_ADDR`/`MASTER_PORT` must be set; on multiple machines export them on every node (or use `torchrun`).
 
 Note: For real-world applications, you will need to implement a custom `overlapped_forward_backward` method tailored to your specific module.
 
