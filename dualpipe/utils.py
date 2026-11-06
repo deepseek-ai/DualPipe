@@ -50,7 +50,7 @@ def chunk_tensor(x, chunks, dim):
 
 
 def cat_tensor(x, dim):
-    if (isinstance(x, tuple) or isinstance(x, list)):
+    if isinstance(x, (tuple, list)):
         if len(x) == 1:
             return x[0]
         elif x[0] is None:
@@ -72,8 +72,10 @@ def scatter(inputs, chunks, dim):
 
 
 def gather(micro_outputs, dim):
-    assert isinstance(micro_outputs[0], (torch.Tensor, tuple, list))
-    if isinstance(micro_outputs[0], torch.Tensor):
+    if not micro_outputs:
+        return ()
+    assert all(x is None or isinstance(x, (torch.Tensor, tuple, list)) for x in micro_outputs)
+    if isinstance(micro_outputs[0], torch.Tensor) or micro_outputs[0] is None:
         micro_outputs = [(x,) for x in micro_outputs]
     outputs = [x for x in zip(*micro_outputs)]
     outputs = tuple(cat_tensor(x, dim=dim) for x in outputs)

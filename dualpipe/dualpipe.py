@@ -106,16 +106,18 @@ class DualPipe(nn.Module):
             output_grads = self.output_grad_chunks[phase][chunk_id]
             self.output_grad_chunks[phase][chunk_id] = None
             non_empty = [(t, g) for t, g in zip(outputs, output_grads) if g is not None]
-            outputs, output_grads = list(zip(*non_empty))
-            if len(outputs) > 0:
+            if non_empty:
+                outputs, output_grads = list(zip(*non_empty))
                 run_backward(outputs, output_grads)
+            else:
+                outputs, output_grads = [], []
         WeightGradStore.enabled = False
         if enable_zb:
             WeightGradStore.flush()
 
         inputs = self.input_chunks[phase][chunk_id]
         self.input_chunks[phase][chunk_id] = None
-        input_grads = [t.grad for t in inputs]
+        input_grads = [t.grad if t is not None else None for t in inputs]
         self.input_grad_chunks[phase].append(input_grads)
 
     def _forward_backward_compute_chunk(self, phase0: int, phase1: int) -> None:
@@ -162,7 +164,10 @@ class DualPipe(nn.Module):
             output_grads1 = self.output_grad_chunks[phase1][chunk_id1]
             self.output_grad_chunks[phase1][chunk_id1] = None
             non_empty = [(t, g) for t, g in zip(outputs1, output_grads1) if g is not None]
-            outputs1, output_grads1 = list(zip(*non_empty))
+            if non_empty:
+                outputs1, output_grads1 = list(zip(*non_empty))
+            else:
+                outputs1, output_grads1 = [], []
 
         # forward & backward
         outputs0, loss0 = type(module0).overlapped_forward_backward(
@@ -179,7 +184,7 @@ class DualPipe(nn.Module):
         # post-backward
         inputs = self.input_chunks[phase1][chunk_id1]
         self.input_chunks[phase1][chunk_id1] = None
-        input_grads1 = [t.grad for t in inputs]
+        input_grads1 = [t.grad if t is not None else None for t in inputs]
         self.input_grad_chunks[phase1].append(input_grads1)
 
     def _forward_chunk(self, phase: int, recv: bool = True, send: bool = True) -> None:
